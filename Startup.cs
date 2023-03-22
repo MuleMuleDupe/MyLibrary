@@ -29,6 +29,7 @@ namespace MyLibrary
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
             //Services configuration
             services.AddScoped<IAuthorsService, AuthorsService>();
+            services.AddScoped<IBooksService, BooksService>();
             services.AddControllersWithViews();
         }
 

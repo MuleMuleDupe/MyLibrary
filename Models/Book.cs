@@ -41,7 +41,6 @@ namespace MyLibrary.Models
         //Author Relationship
         public int AuthorId { get; set; }
         [ForeignKey("AuthorId")]
-        
         public Author Author { get; set; }
     }
 }

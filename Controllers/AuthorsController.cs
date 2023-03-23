@@ -83,5 +83,10 @@ namespace MyLibrary.Controllers
             await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
+        public async Task<Author> GetAuthor(int id)
+        {
+            var authorDetails = await _service.GetByIdAsync(id);
+            return authorDetails;
+        }
     }
 }

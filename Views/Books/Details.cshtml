@@ -22,13 +22,12 @@
                     <div class="card-body">
                         <p class="card-text">@Model.Description</p>
                         <p class="card-text">
-                            <b>Author: </b>
-                            <a asp-controller="Authors" asp-action="Details" asp-route-id="@Model.AuthorId">
-                                @Model.AuthorId
-                            </a>
+                            <b>AuthorId: </b>
+                            <a asp-controller="Authors" asp-action="Details" asp-route-id="@Model.AuthorId">@Model.AuthorId</a>
                         </p>
-                        <p class="card-text"><b>Category: </b>@Model.Genre</p>
-                        <p class="card-text"><b>Start Date: </b>@Model.ReleaseDate</p>
+                        <p class="card-text"><b>Genre: </b>@Model.Genre</p>
+                        <p class="card-text"><b>Price: </b>@Model.Price</p>
+                        <p class="card-text"><b>Released Date: </b>@Model.ReleaseDate</p>
 
                     </div>
                 </div>

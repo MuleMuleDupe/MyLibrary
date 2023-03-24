@@ -15,7 +15,7 @@ namespace MyLibrary.Models
 
         [Display(Name = "Name")]
         [Required(ErrorMessage = "Name is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Full Name must be between 3 and 50 chars")]
+        [StringLength(150, MinimumLength = 3, ErrorMessage = "Full Name must be between 3 and 50 chars")]
         public string Name { get; set; }
 
         [Display(Name = "Description")]
@@ -28,6 +28,7 @@ namespace MyLibrary.Models
 
         [Display(Name = "Price")]
         [Required(ErrorMessage = "Price is required!")]
+
         public double Price { get; set; }
 
         [Display(Name = "Genre")]
@@ -39,6 +40,9 @@ namespace MyLibrary.Models
         public string ImageURL { get; set; }
 
         //Author Relationship
+        [Display(Name="AuthorId")]
+        [Required(ErrorMessage = "AuthorId is required!")]
+        [Range(0, 3, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int AuthorId { get; set; }
         [ForeignKey("AuthorId")]
         public Author Author { get; set; }

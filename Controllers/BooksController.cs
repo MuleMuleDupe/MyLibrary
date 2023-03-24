@@ -41,7 +41,7 @@ namespace MyLibrary.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //Get: Authors/Details
+        //Get: Books/Details
         public async Task<IActionResult> Details(int id)
         {
             var bookDetails = await _service.GetByIdAsync(id);
@@ -50,7 +50,7 @@ namespace MyLibrary.Controllers
             return View(bookDetails);
         }
 
-        //Get: Authors/Edit
+        //Get: Books/Edit
         public async Task<IActionResult> Edit(int id)
         {
             var bookDetails = await _service.GetByIdAsync(id);
@@ -69,7 +69,7 @@ namespace MyLibrary.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //Get: Authors/Delete
+        //Get: Books/Delete
         public async Task<IActionResult> Delete(int id)
         {
             var bookDetails = await _service.GetByIdAsync(id);

@@ -61,11 +61,24 @@ namespace MyLibrary.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Name,Description,ReleaseDate,Price,Genre,ImageURL,AuthorId")] Book book)
         {
-            if (!ModelState.IsValid)
+            // Check if a book with the specified id exists in the database
+            var existingBook = await _service.GetByIdAsync(id);
+            if (existingBook == null)
             {
-                return View(book);
+                return NotFound();
             }
-            await _service.UpdateAsync(id, book);
+
+            // Update the properties of the existing book with the values from the edited book
+            existingBook.Name = book.Name;
+            existingBook.Description = book.Description;
+            existingBook.ReleaseDate = book.ReleaseDate;
+            existingBook.Price = book.Price;
+            existingBook.Genre = book.Genre;
+            existingBook.ImageURL = book.ImageURL;
+            existingBook.AuthorId = book.AuthorId;
+
+            // Save the changes to the database
+            await _service.UpdateAsync(id, existingBook);
             return RedirectToAction(nameof(Index));
         }
 

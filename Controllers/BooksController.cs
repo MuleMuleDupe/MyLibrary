@@ -26,23 +26,26 @@ namespace MyLibrary.Controllers
             return View(allBooks);
         }
 
-        //Get: Books/Create
+        //Get: Books/Create - Returns the view for creating a new book
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
+        // Post: Books/Create - Adds a new book to the database
         public async Task<IActionResult> Create([Bind("Name,Description,ReleaseDate,Price,Genre,ImageURL,AuthorId")] Book book)
         {
+            // Check if the model state is not valid
             if (!ModelState.IsValid)
             {
+                // Return the view with the invalid model
                 return View(book);
             }
             await _service.AddAsync(book);
             return RedirectToAction(nameof(Index));
         }
 
-        //Get: Books/Details
+        // Get: Books/Details - Returns the details of a book with the specified id
         public async Task<IActionResult> Details(int id)
         {
             var bookDetails = await _service.GetByIdAsync(id);
@@ -51,7 +54,7 @@ namespace MyLibrary.Controllers
             return View(bookDetails);
         }
 
-        //Get: Books/Edit
+        // Get: Books/Edit - Returns the view for editing a book with the specified id
         public async Task<IActionResult> Edit(int id)
         {
             var bookDetails = await _service.GetByIdAsync(id);
@@ -97,6 +100,8 @@ namespace MyLibrary.Controllers
         }
 
         //Get: Books/Delete
+        // This action method retrieves the details of a book with a specific id and shows the details on the delete confirmation page
+        // If the book is not found, it shows the "NotFound" view
         public async Task<IActionResult> Delete(int id)
         {
             var bookDetails = await _service.GetByIdAsync(id);
@@ -105,6 +110,9 @@ namespace MyLibrary.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        // This action method deletes the book with the specific id from the database
+        // If the book is not found, it shows the "NotFound" view
+        // After the book is deleted, it redirects to the index page
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var bookDetails = await _service.GetByIdAsync(id);

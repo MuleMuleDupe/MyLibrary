@@ -42,7 +42,6 @@ namespace MyLibrary.Models
         //Author Relationship
         [Display(Name="AuthorId")]
         [Required(ErrorMessage = "AuthorId is required!")]
-        [Range(0, 3, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int AuthorId { get; set; }
         [ForeignKey("AuthorId")]
         public Author Author { get; set; }

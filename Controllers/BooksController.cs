@@ -13,11 +13,12 @@ namespace MyLibrary.Controllers
     public class BooksController : Controller
     {
         private readonly IBooksService _service;
+        private readonly IAuthorsService _authorService;
 
-
-        public BooksController(IBooksService service)
+        public BooksController(IBooksService service, IAuthorsService authorService)
         {
             _service = service;
+            _authorService = authorService;
         }
         public async Task<IActionResult> Index()
         {
@@ -61,6 +62,19 @@ namespace MyLibrary.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Name,Description,ReleaseDate,Price,Genre,ImageURL,AuthorId")] Book book)
         {
+            // Check if the AuthorId in the book parameter is valid
+            var author = await _authorService.GetByIdAsync(book.AuthorId);
+            if (author == null)
+            {
+                ModelState.AddModelError("AuthorId", "Invalid author selected.");
+            }
+
+            // Check if the book is valid
+            if (!ModelState.IsValid)
+            {
+                return View(book);
+            }
+
             // Check if a book with the specified id exists in the database
             var existingBook = await _service.GetByIdAsync(id);
             if (existingBook == null)
